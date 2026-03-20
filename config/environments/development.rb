@@ -9,6 +9,11 @@ Rails.application.configure do
     host = "#{codespace_name}-3000.#{codespaces_port_forwarding_domain}"
 
     config.hosts << host
+    config.force_ssl = true
+    config.ssl_options = { redirect: { status: 307, body: "Temporary Redirect" } }
+    config.assume_ssl = true
+    # Disable CSRF origin check in Codespaces development
+    config.action_controller.forgery_protection_origin_check = false
   end
 
   # Make code changes take effect immediately without server restart.
